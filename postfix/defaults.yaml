@@ -2,4 +2,7 @@
 Debian:
   pkgs:
     - postfix
+RedHat:
+  pkgs:
+    - postfix
 {% endload %}
