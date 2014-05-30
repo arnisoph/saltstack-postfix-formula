@@ -70,4 +70,4 @@ OS Compatibility
 Tested with:
 
 * GNU/ Linux Debian Wheezy
-* CentOS 6
+* CentOS 6 (partly)
