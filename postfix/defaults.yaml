@@ -2,6 +2,8 @@
 Debian:
   pkgs:
     - postfix
+  config:
+    mailname: {}
 RedHat:
   pkgs:
     - postfix
