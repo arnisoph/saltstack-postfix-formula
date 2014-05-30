@@ -6,7 +6,50 @@ Debian:
     - heirloom-mailx
   config:
     mailname: {}
+  directory:
+    command: /usr/sbin
+    config: /etc/postfix
+    daemon: /usr/lib/postfix
+    data: /var/lib/postfix
+    manpage: /usr/share/man
+    dovecot: /usr/libexec/dovecot
+  program:
+    mailq: /usr/bin/mailq.postfix
+    newaliases: /usr/bin/newaliases.postfix
+    sendmail: /usr/sbin/sendmail.postfix
+    postmap: /usr/sbin/postmap
 RedHat:
   pkgs:
     - postfix
+  config:
+    mailname: {}
+  directory:
+    command: /usr/sbin
+    config: /etc/postfix
+    daemon: /usr/libexec/postfix
+    data: /var/lib/postfix
+    manpage: /usr/share/man
+    dovecot: /usr/libexec/dovecot
+  program:
+    mailq: /usr/bin/mailq.postfix
+    newaliases: /usr/bin/newaliases.postfix
+    sendmail: /usr/sbin/sendmail.postfix
+    postmap: /usr/sbin/postmap
+FreeBSD:
+  pkgs:
+    - mail/postfix
+  config:
+    mailname: {}
+  directory:
+    command: /usr/local/sbin
+    config: /usr/local/etc/postfix
+    daemon: /usr/local/libexec/postfix
+    data: /var/db/postfix
+    manpage: /usr/local/man
+    dovecot: /usr/local/libexec/dovecot
+  program:
+    mailq: /usr/local/bin/mailq
+    newaliases: /usr/local/bin/newaliases
+    sendmail: /usr/local/sbin/sendmail
+    postmap: /usr/local/sbin/postmap
 {% endload %}
