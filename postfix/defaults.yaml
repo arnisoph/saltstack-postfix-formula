@@ -2,6 +2,8 @@
 Debian:
   pkgs:
     - postfix
+    - postfix-pcre
+    - heirloom-mailx
   config:
     mailname: {}
 RedHat:

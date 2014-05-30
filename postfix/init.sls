@@ -3,6 +3,9 @@
 {% from "postfix/defaults.yaml" import rawmap with context %}
 {% set datamap = salt['grains.filter_by'](rawmap, merge=salt['pillar.get']('postfix:lookup')) %}
 
+include:
+  - postfix._maps
+
 {% if datamap.ensure|default('installed') in ['absent', 'removed'] %}
   {% set pkgensure = 'removed' %}
 {% else %}
@@ -18,7 +21,7 @@ postfix:
 {% endfor %}
 
 
-{% for a in salt['pillar.get']('postfix:aliases') %}
+{% for a in salt['pillar.get']('postfix:aliases', []) %}
 alias_{{ a.name }}:
   alias:
     - {{ a.ensure|default('present') }}
