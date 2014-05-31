@@ -32,8 +32,8 @@ postfix:
     other:
       - name: block_user
         pairs:
-          john: "# he is spamming, let's block him"
-          chuck: ''
+          john: REJECT Stop spamming
+          chuck: REJECT Stop spamming
   master:
     - service: smtp
       type: inet

@@ -35,7 +35,14 @@ alias_{{ a.name }}:
     - {{ a.ensure|default('present') }}
     - name: {{ a.name }}
     - target: {{ a.target|default('root') }}
+    - watch_in:
+      - cmd: newaliases
 {% endfor %}
+
+newaliases:
+  cmd:
+    - wait
+    - name: /usr/bin/newaliases
 
 mailname:
   file:

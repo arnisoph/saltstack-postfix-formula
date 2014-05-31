@@ -13,6 +13,8 @@ include:
     - mode: 750
     - user: root
     - group: postfix
+    - require:
+      - pkg: postfix
 
   {% for m in maps|default([]) %}
 /etc/postfix/{{ class }}/{{ m.name }}:
@@ -21,20 +23,22 @@ include:
     - mode: 640
     - user: root
     - group: postfix
+    - require:
+      - pkg: postfix
     - contents: |
     {% for k, v in m.pairs.items()|default({}) %}
         {{ k ~ '\t\t\t' ~ v }}
     {%- endfor %}
-
-    {% if m.type|default('btree') in ['btree'] %}
+    {% if not m.type|default('btree') in ['btree'] %}
+    - watch_in:
+      - service: postfix
+    {% else %}
 /etc/postfix/{{ class }}/{{ m.name }}.db:
   cmd:
     - wait
     - name: '/usr/sbin/postmap {{ m.type|default('btree') }}:/etc/postfix/{{ class }}/{{ m.name }} && chgrp postfix /etc/postfix/{{ class }}/{{ m.name }}.db'
     - watch:
       - file: /etc/postfix/{{ class }}/{{ m.name }}
-    {% else %}
-    {# TODO: reload/restart postfix #}
     {% endif %}
   {% endfor %}
 {% endfor %}
