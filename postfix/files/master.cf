@@ -1,0 +1,25 @@
+# ===============================================================================
+# service       type{{ '\t' }}private{{ '\t' }}unpriv{{ '\t' }}chroot{{ '\t' }}wakeup{{ '\t' }}maxproc{{ '\t' }}command + args
+#           {{ '\t' }}(yes){{ '\t' }}(yes){{ '\t' }}(yes){{ '\t' }}(never){{ '\t' }}(100)
+# ===============================================================================
+
+{%- set services = salt['pillar.get']('postfix:master', []) -%}
+
+{%- for s in services -%}
+  {%- if s.service|length > 10 -%}
+    {% set c_service = s.service ~ '\n         \t' -%}
+  {%- else -%}
+    {%- set c_service = s.service ~ '    ' ~ '\t' -%}
+  {%- endif %}
+{{ c_service -}}
+{{ s.type|default('unix') }}{{ '\t' -}}
+{{ s.private|default('-') }}{{ '\t' -}}
+{{ s.unpriv|default('-') }}{{ '\t' -}}
+{{ s.chroot|default('-') }}{{ '\t' -}}
+{{ s.wakeup|default('-') }}{{ '\t' -}}
+{{ s.maxproc|default('-') }}{{ '\t' -}}
+{{ s.command|default(s.service) -}}
+  {%- for a in s.cmdargs|default([]) %}
+  {{ a -}}
+  {%- endfor %}
+{%- endfor %}

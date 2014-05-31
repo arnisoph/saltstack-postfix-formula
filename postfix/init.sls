@@ -29,11 +29,22 @@ alias_{{ a.name }}:
     - target: {{ a.target|default('root') }}
 {% endfor %}
 
-{{ datamap.config.mailname.path|default('/etc/mailname') }}:
+mailname:
   file:
     - managed
+    - name: {{ datamap.config.mailname.path|default('/etc/mailname') }}
     - mode: 644
     - user: root
     - group: root
     - contents: |
         {{ salt['pillar.get']('postfix:settings:mailname', salt['grains.get']('fqdn')) }}
+
+master:
+  file:
+    - managed
+    - name: {{ datamap.config.master.path|default('/etc/postfix/master.cf') }}
+    - source: salt://postfix/files/master.cf
+    - mode: 640
+    - user: root
+    - group: postfix
+    - template: jinja

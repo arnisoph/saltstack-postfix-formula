@@ -6,6 +6,7 @@ Debian:
     - heirloom-mailx
   config:
     mailname: {}
+    master: {}
   directory:
     command: /usr/sbin
     config: /etc/postfix
@@ -23,6 +24,7 @@ RedHat:
     - postfix
   config:
     mailname: {}
+    master: {}
   directory:
     command: /usr/sbin
     config: /etc/postfix
@@ -40,6 +42,7 @@ FreeBSD:
     - mail/postfix
   config:
     mailname: {}
+    master: {}
   directory:
     command: /usr/local/sbin
     config: /usr/local/etc/postfix
