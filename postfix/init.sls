@@ -44,6 +44,7 @@ newaliases:
     - wait
     - name: /usr/bin/newaliases
 
+{% if 'mailname' in datamap.config.manage|default([]) %}
 mailname:
   file:
     - managed
@@ -53,7 +54,9 @@ mailname:
     - group: root
     - contents: |
         {{ salt['pillar.get']('postfix:settings:mailname', salt['grains.get']('fqdn')) }}
+{% endif %}
 
+{% if 'main' in datamap.config.manage|default([]) %}
 main:
   file:
     - managed
@@ -63,7 +66,9 @@ main:
     - user: root
     - group: postfix
     - template: jinja
+{% endif %}
 
+{% if 'master' in datamap.config.manage|default([]) %}
 master:
   file:
     - managed
@@ -73,3 +78,4 @@ master:
     - user: root
     - group: postfix
     - template: jinja
+{% endif %}
