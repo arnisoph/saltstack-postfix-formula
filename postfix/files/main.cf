@@ -1,0 +1,8 @@
+{%- set config = salt['pillar.get']('postfix:main:sections', []) -%}
+
+{%- for s in config -%}
+{{ '\n#' ~ s.name|default('(No section name provided)') }}
+  {%- for k, v in s.items() if k != 'name' %}
+{{ k }} = {{ v }}
+  {%- endfor %}
+{% endfor %}

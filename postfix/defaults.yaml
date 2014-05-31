@@ -5,8 +5,14 @@ Debian:
     - postfix-pcre
     - heirloom-mailx
   config:
+    manage:
+      - mailname
+      - master
+      - main
     mailname: {}
     master: {}
+    main: {}
+  service: {}
   directory:
     command: /usr/sbin
     config: /etc/postfix
@@ -23,8 +29,14 @@ RedHat:
   pkgs:
     - postfix
   config:
+    manage:
+      - mailname
+      - master
+      - main
     mailname: {}
     master: {}
+    main: {}
+  service: {}
   directory:
     command: /usr/sbin
     config: /etc/postfix
@@ -41,8 +53,14 @@ FreeBSD:
   pkgs:
     - mail/postfix
   config:
+    manage:
+      - mailname
+      - master
+      - main
     mailname: {}
     master: {}
+    main: {}
+  service: {}
   directory:
     command: /usr/local/sbin
     config: /usr/local/etc/postfix

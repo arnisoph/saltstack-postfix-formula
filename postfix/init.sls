@@ -19,6 +19,14 @@ postfix:
 {% for p in datamap.pkgs %}
       - {{ p }}
 {% endfor %}
+  service:
+    - {{ datamap.service.state|default('running') }}
+    - name: {{ datamap.service.name|default('postfix') }}
+    - enable: {{ datamap.service.enable|default(True) }}
+    - watch:
+{% for f in datamap.config.manage %}
+      - file: {{ f }}
+{% endfor %}
 
 
 {% for a in salt['pillar.get']('postfix:aliases', []) %}
@@ -38,6 +46,16 @@ mailname:
     - group: root
     - contents: |
         {{ salt['pillar.get']('postfix:settings:mailname', salt['grains.get']('fqdn')) }}
+
+main:
+  file:
+    - managed
+    - name: {{ datamap.config.master.path|default('/etc/postfix/main.cf') }}
+    - source: salt://postfix/files/main.cf
+    - mode: 640
+    - user: root
+    - group: postfix
+    - template: jinja
 
 master:
   file:

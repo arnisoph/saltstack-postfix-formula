@@ -144,3 +144,39 @@ postfix:
       command: pipe
       cmdargs:
         - 'flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py ${nexthop} ${user}'
+  main:
+    sections:
+      - name: GENERAL
+        myhostname: mymailhostname
+        myorigin: $myhostname
+        mydestination: $myorigin, localhost, localhost.$mydomain, {{ salt['grains.get']('fqdn') }}
+        mynetworks: 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+        inet_interfaces: all
+        inet_protocols: ipv4
+      - name: MAPS AND TRANSPORT SETTINGS
+        alias_maps: hash:/etc/aliases
+        alias_database: $alias_maps
+      - name: MAIL AND CONNECTION LIMITATIONS
+        message_size_limit: 67108864 {#- 64 MB #}
+        mailbox_size_limit: 0
+      - name: SMTP(D) RESTRICTIONS AND POLICIES
+        smtpd_helo_required: 'yes'
+        disable_vrfy_command: 'yes'
+        smtpd_discard_ehlo_keywords: silent-discard, dsn
+      - name: CODES AND REASONS
+        unverified_recipient_reject_code: 557
+        unverified_recipient_reject_reason: User unknown
+      - name: AUTHENTICATION
+        #smtp_sasl_auth_enable      = yes
+        #smtp_sasl_security_options = noanonymous
+        #smtp_sasl_mechanism_filter = plain, login
+        #smtp_sasl_password_maps    = btree:/etc/postfix/sender/sasl_passwd
+      - name: MISC
+        smtpd_banner: $myhostname ESMTP $mail_name
+        biff: 'no'
+        debugger_command: PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin ddd $daemon_directory/$process_name $process_id & sleep 5
+        append_dot_mydomain: 'no'
+        append_at_myorigin: 'yes'
+        readme_directory: 'no'
+        recipient_delimiter: +
+        soft_bounce: 'no'
