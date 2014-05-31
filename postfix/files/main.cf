@@ -2,7 +2,7 @@
 
 {%- for s in config -%}
 {{ '\n# ' ~ s.name|default('(No section name provided)') }}
-  {%- for k, v in s.items() if k != 'name' %}
+  {%- for k, v in s|dictsort if k != 'name' %}
 {{ k }} = {{ v }}
   {%- endfor %}
 {% endfor -%}

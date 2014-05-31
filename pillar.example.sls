@@ -164,6 +164,7 @@ postfix:
         disable_vrfy_command: 'yes'
         smtpd_discard_ehlo_keywords: silent-discard, dsn
         smtpd_recipient_restrictions:
+          reject_unauth_destination
           reject_non_fqdn_sender
           reject_non_fqdn_recipient
           reject_unknown_client_hostname
