@@ -33,10 +33,6 @@ Available states
 -----------
 Install the postfix package and do basic configuration
 
-``postfix.smarthost``
----------------------
-Configure mail system to work as a smarthost
-
 Additional resources
 ====================
 
