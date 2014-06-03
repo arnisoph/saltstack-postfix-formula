@@ -12,7 +12,7 @@
     {%- set c_service = s.service ~ '    ' ~ '\t' -%}
   {%- endif %}
 {{ c_service -}}
-{{ s.type|default('unix') }}{{ '\t' -}}
+{{ s.type|default('unix') }}{{ '\t' -}}
 {{ s.private|default('-') }}{{ '\t' -}}
 {{ s.unpriv|default('-') }}{{ '\t' -}}
 {{ s.chroot|default('-') }}{{ '\t' -}}
