@@ -5,6 +5,16 @@
 
 include:
   - postfix._maps
+{% for si in salt['pillar.get']('postfix:lookup:sls_include', []) %}
+  - {{ si }}
+{% endfor %}
+
+extend: {{ salt['pillar.get']('postfix:lookup:sls_extend', '{}') }}
+{#
+{-% for k, v in salt['pillar.get']('opennebula:lookup:sunstone:sls_extend', {}).items() }-}
+  {-{ k }-}: {-{ v }-}
+{-% endfor }-}
+#}
 
 {% if datamap.ensure|default('installed') in ['absent', 'removed'] %}
   {% set pkgensure = 'removed' %}
