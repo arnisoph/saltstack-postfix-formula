@@ -72,7 +72,7 @@ main:
     - managed
     - name: {{ datamap.config.master.path|default('/etc/postfix/main.cf') }}
     - source: salt://postfix/files/main.cf
-    - mode: 640
+    - mode: 644
     - user: root
     - group: postfix
     - template: jinja
