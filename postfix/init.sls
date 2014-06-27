@@ -25,10 +25,7 @@ extend: {{ salt['pillar.get']('postfix:lookup:sls_extend', '{}') }}
 postfix:
   pkg:
     - {{ pkgensure }}
-    - pkgs:
-{% for p in datamap.pkgs %}
-      - {{ p }}
-{% endfor %}
+    - pkgs: {{ datamap.pkgs }}
   service:
     - {{ datamap.service.state|default('running') }}
     - name: {{ datamap.service.name|default('postfix') }}

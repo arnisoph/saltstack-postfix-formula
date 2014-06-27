@@ -10,7 +10,7 @@ include:
 /etc/postfix/{{ class }}:
   file:
     - directory
-    - mode: 750
+    - mode: 755
     - user: root
     - group: postfix
     - require:
@@ -20,7 +20,7 @@ include:
 /etc/postfix/{{ class }}/{{ m.name }}:
   file:
     - managed
-    - mode: 640
+    - mode: {{ m.mode|default(640) }}
     - user: root
     - group: postfix
     - require:
