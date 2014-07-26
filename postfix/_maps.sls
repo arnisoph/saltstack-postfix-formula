@@ -20,7 +20,7 @@ include:
 /etc/postfix/{{ class }}/{{ m.name }}:
   file:
     - managed
-    - mode: {{ m.mode|default(640) }}
+    - mode: {{ m.mode|default(644) }}
     - user: root
     - group: postfix
     - require:
