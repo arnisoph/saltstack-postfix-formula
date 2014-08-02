@@ -6,7 +6,7 @@
 {%- set services = salt['pillar.get']('postfix:master', []) -%}
 
 {%- for s in services -%}
-  {%- if s.service|length > 10 -%}
+  {%- if s.service|string|length > 10 -%}
     {% set c_service = s.service ~ '\n         \t' -%}
   {%- else -%}
     {%- set c_service = s.service ~ '    ' ~ '\t' -%}
