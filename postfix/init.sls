@@ -10,11 +10,6 @@ include:
 {% endfor %}
 
 extend: {{ salt['pillar.get']('postfix:lookup:sls_extend', '{}') }}
-{#
-{-% for k, v in salt['pillar.get']('opennebula:lookup:sunstone:sls_extend', {}).items() }-}
-  {-{ k }-}: {-{ v }-}
-{-% endfor }-}
-#}
 
 {% if datamap.ensure|default('installed') in ['absent', 'removed'] %}
   {% set pkgensure = 'removed' %}
@@ -84,5 +79,17 @@ master:
     - mode: 640
     - user: root
     - group: postfix
+    - template: jinja
+{% endif %}
+
+{% if 'bounce_msg' in datamap.config.manage|default([]) %}
+bounce_msg:
+  file:
+    - managed
+    - name: {{ datamap.config.bounce_msg.path|default('/etc/postfix/other/bounce_msg') }}
+    - source: salt://postfix/files/bounce_msg
+    - mode: 644
+    - user: root
+    - group: root
     - template: jinja
 {% endif %}

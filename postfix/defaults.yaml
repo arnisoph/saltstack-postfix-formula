@@ -9,9 +9,11 @@ Debian:
       - mailname
       - master
       - main
+      - bounce_msg
     mailname: {}
     master: {}
     main: {}
+    bounce_msg: {}
   service: {}
   directory:
     command: /usr/sbin
@@ -33,9 +35,11 @@ RedHat:
       - mailname
       - master
       - main
+      - bounce_msg
     mailname: {}
     master: {}
     main: {}
+    bounce_msg: {}
   service: {}
   directory:
     command: /usr/sbin
@@ -57,9 +61,11 @@ FreeBSD:
       - mailname
       - master
       - main
+      - bounce_msg
     mailname: {}
     master: {}
     main: {}
+    bounce_msg: {}
   service: {}
   directory:
     command: /usr/local/sbin
