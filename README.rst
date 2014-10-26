@@ -39,7 +39,9 @@ Install the postfix package and do basic configuration
 Additional resources
 ====================
 
-None
+You may find the following formulas helpful, too:
+
+* `saltstack-crypto-formula <https://github.com/bechtoldt/saltstack-crypto-formula>`_ (useful for X509 management and PFS preparations)
 
 Templates
 =========
@@ -66,7 +68,8 @@ Salt Compatibility
 
 Tested with:
 
-* 2014.1.x
+* 2014.1
+* 2014.7
 
 OS Compatibility
 ================

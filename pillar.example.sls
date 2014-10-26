@@ -187,3 +187,9 @@ postfix:
         readme_directory: 'no'
         recipient_delimiter: +
         soft_bounce: 'no'
+#      - name: TRANSPORT SECURITY
+#        smtpd_tls_loglevel: 1
+#        smtpd_tls_dh1024_param_file: /etc/postfix/dh_2048.pem
+#        smtpd_tls_dh512_param_file: /etc/postfix/dh_512.pem
+#        smtpd_tls_eecdh_grade: strong
+#        tls_preempt_cipherlist: 'yes'
