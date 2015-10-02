@@ -4,6 +4,7 @@ Debian:
     - postfix
     - postfix-pcre
     - heirloom-mailx
+    - libsasl2-modules
   config:
     manage:
       - mailname
@@ -30,6 +31,8 @@ Debian:
 RedHat:
   pkgs:
     - postfix
+    - cyrus-sasl
+    - cyrus-sasl-plain
   config:
     manage:
       - mailname
